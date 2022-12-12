@@ -1,0 +1,103 @@
+<div *ngIf="!currentProduct.id && viewMode">
+    <h1 class="d-flex flex-column align-items-center justify-content-center m-2 mt-5 pt-5 px-2">
+        <mat-icon class="text-info" style="font-size: 66px; width: fit-content; height: 100%;">info</mat-icon>
+        <span class="mt-2 font-weight-lighter text-center">Your Product's detail will be shown here.</span>
+    </h1>
+</div>
+
+<div class="p-3" *ngIf="viewMode; else editable">
+    <div *ngIf="currentProduct.id">
+        <h3 class="d-flex align-items-center justify-content-center my-3">
+            <mat-icon class="text-info" style="font-size: 32px; width: fit-content; height: 100%;">info</mat-icon>
+            <span class="ml-1 " style="text-decoration: underline;">Detail:</span>
+        </h3>
+        <div class="mx-4 my-2" style="font-size: 1.3rem;">
+            <div>
+                <label><strong>ID:</strong></label>
+                {{ currentProduct.id }}
+            </div>
+            <div>
+                <label><strong>Reference:</strong></label>
+                {{ currentProduct.reference }}
+            </div>
+            <div>
+                <label><strong>Name:</strong></label>
+                {{ currentProduct.name }}
+            </div>
+            <div>
+                <label><strong>Description:</strong></label>
+                {{ currentProduct.description }}
+            </div>
+            <div>
+                <label><strong>Price:</strong></label>
+                {{ currentProduct.price }}
+            </div>
+            <a class="btn btn-warning my-2" routerLink="/products/{{ currentProduct.id }}">
+                Edit
+            </a>
+        </div>
+    </div>
+</div>
+
+<ng-template #editable>
+    <div *ngIf="currentProduct.id" class="edit-form">
+        <h3 class="d-flex align-items-center justify-content-center mb-5 mt-3">
+            <mat-icon class="text-info" style="font-size: 32px; width: fit-content; height: 100%;">edit</mat-icon>
+            <span class="ml-1 " style="text-decoration: underline;">Edit Product</span>
+        </h3>
+        <form>
+            <mat-form-field class="w-50 p-2 " appearance="outline">
+                <mat-label>Reference</mat-label>
+                <input matInput placeholder="product reference" [(ngModel)]="currentProduct.reference"
+                    [formControl]="refCntrl" required #ref>
+                <mat-error *ngIf="refCntrl.invalid">{{getRefErrorMessage()}}</mat-error>
+                <mat-icon matSuffix>library_books</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="w-50 p-2 " appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="product name" [(ngModel)]="currentProduct.name" [formControl]="nameCntrl"
+                    required #name>
+                <mat-error *ngIf="nameCntrl.invalid">{{getNameErrorMessage()}}</mat-error>
+                <mat-icon matSuffix>edit</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 p-2 " appearance="outline">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="product description" [(ngModel)]="currentProduct.description"
+                    [formControl]="descCntrl" required #desc>
+                <mat-error *ngIf="descCntrl.invalid">{{getDescErrorMessage()}}</mat-error>
+                <mat-icon matSuffix>description</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="w-50 p-2 mr-1" appearance="outline" floatLabel="always">
+                <mat-label>Amount</mat-label>
+                <input matInput type="number" class="right-align " [(ngModel)]="currentProduct.price"
+                    [formControl]="priceCntrl" placeholder="0" required #price>
+                <mat-error *ngIf="priceCntrl.invalid">{{getPriceErrorMessage()}}</mat-error>
+                <span matTextPrefix>$&nbsp;</span>
+                <span matTextSuffix>.00</span>
+            </mat-form-field>
+        </form>
+
+        <div class="my-1">
+            <button class="btn btn-danger mx-2" (click)="deleteProduct()">
+                Delete
+            </button>
+
+            <button type="submit" class="btn btn-success mx-2" (click)="updateProduct()">
+                Update
+            </button>
+            <p class="m-3 p-2">{{ message }}</p>
+        </div>
+    </div>
+
+    <div *ngIf="!currentProduct.id">
+        <br />
+
+        <h1 class="d-flex flex-column align-items-center justify-content-center m-2 mt-5 pt-5 px-2">
+            <mat-icon class="text-danger" style="font-size: 66px; width: fit-content; height: 100%;">report</mat-icon>
+            <span class="mt-2 font-weight-lighter text-center">Cannot access this Product...</span>
+        </h1>
+    </div>
+</ng-template>
