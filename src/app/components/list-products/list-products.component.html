@@ -1,0 +1,125 @@
+<div class="list row">
+    <div class="col-12">
+        <div class="input-group mb-4 w-50 mx-auto">
+            <input type="text" class="form-control rounded-full-left" placeholder="Search by product name"
+                [(ngModel)]="name" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-info rounded-full-right" type="button" (click)="searchTitle()">
+                    Search
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <section class='section'>
+            <h2 class="d-flex align-items-center justify-content-center my-3">
+                <mat-icon class="text-info"
+                    style="font-size: 44px; width: fit-content; height: 100%;">receipt_long</mat-icon>
+                <span class="ml-1 ">Product List</span>
+            </h2>
+            <div class="section_our_product my-2">
+                <div class="product_cards_box row">
+                    <!-- Products loop -->
+                    <div class="col-6 p-1" *ngFor="let product of products; let i = index"
+                        [class.active]="i == currentIndex">
+                        <div class="product_card" (click)="setActiveProduct(product, i)">
+                            <div class="hover_color_bubble"></div>
+                            <div class="so_top_icon mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512"
+                                    style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                    <circle style="fill:#366695;" cx="256" cy="256" r="256" />
+                                    <path style="fill:#273B7A;"
+                                        d="M128.245,383.755l128.238,128.238C397.645,511.733,512,397.224,512,256  c0-22.573-2.934-44.458-8.42-65.308L398.222,85.333L128.245,383.755z" />
+                                    <path style="fill:#71E2EF;"
+                                        d="M138.199,387.879H373.8c7.775,0,14.079-6.303,14.079-14.079V138.199  c0-7.775-6.303-14.077-14.079-14.077H138.199c-7.775,0-14.077,6.303-14.077,14.077V373.8  C124.121,381.576,130.424,387.879,138.199,387.879z" />
+                                    <path style="fill:#38C6D9;"
+                                        d="M373.8,124.121H256.286v263.758H373.8c7.775,0,14.079-6.303,14.079-14.079V138.2  C387.879,130.424,381.576,124.121,373.8,124.121z" />
+                                    <path style="fill:#B3F1F4;"
+                                        d="M138.199,124.121c-7.775,0-14.077,6.303-14.077,14.079v235.601c0,7.775,6.303,14.079,14.079,14.079  h89.643V124.121H138.199z" />
+                                    <path style="fill:#E03A00;"
+                                        d="M142.222,199.111L142.222,199.111c-15.71,0-28.444-12.734-28.444-28.444V85.333h56.889v85.333  C170.667,186.377,157.932,199.111,142.222,199.111z" />
+                                    <path style="fill:#FFC61B;"
+                                        d="M199.111,199.111L199.111,199.111c-15.71,0-28.444-12.734-28.444-28.444V85.333h56.889v85.333  C227.556,186.377,214.821,199.111,199.111,199.111z" />
+                                    <path style="fill:#E03A00;"
+                                        d="M256,199.111L256,199.111c-15.71,0-28.444-12.734-28.444-28.444V85.333h56.889v85.333  C284.444,186.377,271.71,199.111,256,199.111z" />
+                                    <g>
+                                        <path style="fill:#940030;"
+                                            d="M256.288,85.333v113.764c15.575-0.157,28.157-12.819,28.157-28.431V85.333H256.288z" />
+                                        <path style="fill:#940030;"
+                                            d="M369.778,199.111L369.778,199.111c-15.71,0-28.444-12.734-28.444-28.444V85.333h56.889v85.333   C398.222,186.377,385.488,199.111,369.778,199.111z" />
+                                    </g>
+                                    <path style="fill:#FF7F4F;"
+                                        d="M312.889,199.111L312.889,199.111c-15.71,0-28.444-12.734-28.444-28.444V85.333h56.889v85.333  C341.333,186.377,328.599,199.111,312.889,199.111z" />
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="solu_title">
+                                <h3>{{product.name}}</h3>
+                            </div>
+                            <div class="solu_description">
+                                <p>
+                                    {{product.description}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+            </div>
+        </section>
+
+        <div *ngIf="(!products?.length);">
+            <h4 class="d-flex flex-column align-items-center justify-content-center m-2 mt-5 pt-5 px-2">
+                <mat-icon class="text-info" style="font-size: 33px; width: fit-content; height: 100%;">info</mat-icon>
+                <span class="mt-2 font-weight-lighter text-center">No products found.</span>
+            </h4>
+        </div>
+
+        <div class="col-12 mt-5 text-center" *ngIf="(products?.length);">
+            <h3 class="d-flex align-items-center justify-content-center my-3">
+                <span class="text-white bg-danger rounded-pill p-1 m-1" style="width: 50px; height: 50px;">
+                    <mat-icon class="mt-1" style="font-size: 30px; width: fit-content; height: 100%;">
+                        warning
+                    </mat-icon>
+                </span>
+                <span class="ml-1">Delete all product from the list.</span>
+            </h3>
+            <button class="btn btn-lg rounded-pill btn-danger" (click)="removeAllProducts()">
+                Delete All
+            </button>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <app-details-product [viewMode]="true" [currentProduct]="currentProduct"></app-details-product>
+    </div>
+</div>
