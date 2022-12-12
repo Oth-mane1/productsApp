@@ -1,0 +1,70 @@
+<div *ngIf="!submitted">
+    <h1 class="d-flex justify-content-center m-2">
+        <mat-icon class="text-info"
+            style="font-size: 56px; width: fit-content; height: 100%;">add_shopping_cart</mat-icon>
+        <span>Add new Product</span>
+    </h1>
+    <p class="text-center text-muted">Fill up the form to add a new product.</p>
+</div>
+<div class="mt-5">
+    <div class="submit-form">
+        <div class="w-75 m-auto" *ngIf="!submitted">
+            <mat-form-field class="w-50 p-2 " appearance="outline">
+                <mat-label>Reference</mat-label>
+                <input matInput placeholder="product reference" [(ngModel)]="product.reference" [formControl]="refCntrl"
+                    required #ref>
+                <mat-error *ngIf="refCntrl.invalid">{{getRefErrorMessage()}}</mat-error>
+                <mat-icon matSuffix>library_books</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="w-50 p-2 " appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="product name" [(ngModel)]="product.name" [formControl]="nameCntrl" required
+                    #name>
+                <mat-error *ngIf="nameCntrl.invalid">{{getNameErrorMessage()}}</mat-error>
+                <mat-icon matSuffix>edit</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="w-100 p-2 " appearance="outline">
+                <mat-label>Description</mat-label>
+                <input matInput placeholder="product description" [(ngModel)]="product.description"
+                    [formControl]="descCntrl" required #desc>
+                <mat-error *ngIf="descCntrl.invalid">{{getDescErrorMessage()}}</mat-error>
+                <mat-icon matSuffix>description</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="w-50 p-2 mr-1" appearance="outline" floatLabel="always">
+                <mat-label>Amount</mat-label>
+                <input matInput type="number" class="right-align " [(ngModel)]="product.price"
+                    [formControl]="priceCntrl" placeholder="0" required #price>
+                <mat-error *ngIf="priceCntrl.invalid">{{getPriceErrorMessage()}}</mat-error>
+                <span matTextPrefix>$&nbsp;</span>
+                <span matTextSuffix>.00</span>
+            </mat-form-field>
+
+            <!-- <mat-form-field class="w-50 p-2 " appearance="outline" floatLabel="always">
+                <mat-label>Image</mat-label>
+                <ngx-mat-file-input matInput [accept]="'image/png, image/jpeg, image/jpeg'" [(ngModel)]="product.image"
+                    [formControl]="imageCntrl" #img>
+                </ngx-mat-file-input>
+                <mat-error *ngIf="imageCntrl.invalid">{{getImageErrorMessage()}}</mat-error>
+            </mat-form-field> -->
+
+            <div class="text-right mx-3">
+                <button (click)="newProduct()" class="btn btn-outline-danger mx-1">cancel</button>
+                <button (click)="saveProduct()" class="btn btn-success mx-1">Add product</button>
+            </div>
+        </div>
+
+        <div *ngIf="submitted">
+            <h1 class="d-flex flex-column align-items-center justify-content-center m-2">
+                <mat-icon class="text-info"
+                    style="font-size: 66px; width: fit-content; height: 100%;">task_alt</mat-icon>
+                <span class="mt-2">Product was submitted successfully!</span>
+            </h1>
+            <div class="text-center mx-3 mt-5">
+                <button class="btn btn-success" (click)="newProduct()">New product</button>
+            </div>
+        </div>
+    </div>
+</div>
