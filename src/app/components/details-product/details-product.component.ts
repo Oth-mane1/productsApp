@@ -63,7 +63,7 @@ export class DetailsProductComponent {
 			.subscribe({
 				next: (res) => {
 					console.log(res);
-					this.message = res.message ? res.message : 'This product was updated successfully!';
+					this.message = res.success ? 'This product was updated successfully!': 'An error occured during the update! please try again!';
 				},
 				error: (e) => console.error(e)
 			});
