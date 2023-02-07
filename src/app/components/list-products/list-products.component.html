@@ -1,6 +1,6 @@
 <div class="list row">
     <div class="col-12">
-        <div class="input-group mb-4 w-50 mx-auto">
+        <div class="input-group mb-5 w-50 mx-auto">
             <input type="text" class="form-control rounded-full-left" placeholder="Search by product name"
                 [(ngModel)]="name" />
             <div class="input-group-append">
@@ -105,8 +105,8 @@
             </h4>
         </div>
 
-        <div class="col-12 mt-5 text-center" *ngIf="(products?.length);">
-            <h3 class="d-flex align-items-center justify-content-center my-3">
+        <div class="col-12 mt-5 text-center border border-danger py-4 px-2" *ngIf="(products?.length);" style="border-radius: 22px;">
+            <h3 class="d-flex align-items-center justify-content-center mb-3">
                 <span class="text-white bg-danger rounded-pill p-1 m-1" style="width: 50px; height: 50px;">
                     <mat-icon class="mt-1" style="font-size: 30px; width: fit-content; height: 100%;">
                         warning
